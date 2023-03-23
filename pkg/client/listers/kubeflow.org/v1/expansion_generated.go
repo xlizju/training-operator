@@ -16,6 +16,14 @@
 
 package v1
 
+// DeepSpeedJobListerExpansion allows custom methods to be added to
+// DeepSpeedJobLister.
+type DeepSpeedJobListerExpansion interface{}
+
+// DeepSpeedJobNamespaceListerExpansion allows custom methods to be added to
+// DeepSpeedJobNamespaceLister.
+type DeepSpeedJobNamespaceListerExpansion interface{}
+
 // MPIJobListerExpansion allows custom methods to be added to
 // MPIJobLister.
 type MPIJobListerExpansion interface{}

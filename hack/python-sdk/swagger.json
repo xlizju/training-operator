@@ -7,6 +7,88 @@
   },
   "paths": {},
   "definitions": {
+    "kubeflow.org.v1.DeepSpeedJob": {
+      "type": "object",
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "default": {},
+          "$ref": "#/definitions/v1.ObjectMeta"
+        },
+        "spec": {
+          "default": {},
+          "$ref": "#/definitions/kubeflow.org.v1.DeepSpeedJobSpec"
+        },
+        "status": {
+          "default": {},
+          "$ref": "#/definitions/v1.JobStatus"
+        }
+      }
+    },
+    "kubeflow.org.v1.DeepSpeedJobList": {
+      "type": "object",
+      "required": [
+        "metadata",
+        "items"
+      ],
+      "properties": {
+        "apiVersion": {
+          "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "default": {},
+            "$ref": "#/definitions/kubeflow.org.v1.DeepSpeedJob"
+          }
+        },
+        "kind": {
+          "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "metadata": {
+          "default": {},
+          "$ref": "#/definitions/v1.ListMeta"
+        }
+      }
+    },
+    "kubeflow.org.v1.DeepSpeedJobSpec": {
+      "type": "object",
+      "required": [
+        "deepspeedReplicaSpecs"
+      ],
+      "properties": {
+        "deepspeedReplicaSpecs": {
+          "description": "DeepSpeedReplicaSpecs contains maps from `DeepSpeedReplicaType` to `ReplicaSpec` that specify the DeepSpeed replicas to run.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/v1.ReplicaSpec"
+          }
+        },
+        "runPolicy": {
+          "description": "RunPolicy encapsulates various runtime policies of the job.",
+          "default": {},
+          "$ref": "#/definitions/v1.RunPolicy"
+        },
+        "slotsPerWorker": {
+          "description": "Specifies the number of slots per worker used in hostfile. Defaults to 1.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "sshAuthMountPath": {
+          "description": "SSHAuthMountPath is the directory where SSH keys are mounted. Defaults to \"/root/.ssh\".",
+          "type": "string"
+        }
+      }
+    },
     "kubeflow.org.v1.ElasticPolicy": {
       "type": "object",
       "properties": {

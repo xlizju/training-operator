@@ -26,6 +26,7 @@ import (
 
 type KubeflowV1Interface interface {
 	RESTClient() rest.Interface
+	DeepSpeedJobsGetter
 	MPIJobsGetter
 	MXJobsGetter
 	PaddleJobsGetter
@@ -37,6 +38,10 @@ type KubeflowV1Interface interface {
 // KubeflowV1Client is used to interact with features provided by the kubeflow.org group.
 type KubeflowV1Client struct {
 	restClient rest.Interface
+}
+
+func (c *KubeflowV1Client) DeepSpeedJobs(namespace string) DeepSpeedJobInterface {
+	return newDeepSpeedJobs(c, namespace)
 }
 
 func (c *KubeflowV1Client) MPIJobs(namespace string) MPIJobInterface {

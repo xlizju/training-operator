@@ -34,6 +34,9 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/kubeflow/common/pkg/apis/common/v1.ReplicaStatus":                        schema_pkg_apis_common_v1_ReplicaStatus(ref),
 		"github.com/kubeflow/common/pkg/apis/common/v1.RunPolicy":                            schema_pkg_apis_common_v1_RunPolicy(ref),
 		"github.com/kubeflow/common/pkg/apis/common/v1.SchedulingPolicy":                     schema_pkg_apis_common_v1_SchedulingPolicy(ref),
+		"github.com/kubeflow/training-operator/pkg/apis/kubeflow.org/v1.DeepSpeedJob":        schema_pkg_apis_kubefloworg_v1_DeepSpeedJob(ref),
+		"github.com/kubeflow/training-operator/pkg/apis/kubeflow.org/v1.DeepSpeedJobList":    schema_pkg_apis_kubefloworg_v1_DeepSpeedJobList(ref),
+		"github.com/kubeflow/training-operator/pkg/apis/kubeflow.org/v1.DeepSpeedJobSpec":    schema_pkg_apis_kubefloworg_v1_DeepSpeedJobSpec(ref),
 		"github.com/kubeflow/training-operator/pkg/apis/kubeflow.org/v1.ElasticPolicy":       schema_pkg_apis_kubefloworg_v1_ElasticPolicy(ref),
 		"github.com/kubeflow/training-operator/pkg/apis/kubeflow.org/v1.MPIJob":              schema_pkg_apis_kubefloworg_v1_MPIJob(ref),
 		"github.com/kubeflow/training-operator/pkg/apis/kubeflow.org/v1.MPIJobList":          schema_pkg_apis_kubefloworg_v1_MPIJobList(ref),
@@ -365,6 +368,150 @@ func schema_pkg_apis_common_v1_SchedulingPolicy(ref common.ReferenceCallback) co
 		},
 		Dependencies: []string{
 			"k8s.io/apimachinery/pkg/api/resource.Quantity"},
+	}
+}
+
+func schema_pkg_apis_kubefloworg_v1_DeepSpeedJob(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/kubeflow/training-operator/pkg/apis/kubeflow.org/v1.DeepSpeedJobSpec"),
+						},
+					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("github.com/kubeflow/common/pkg/apis/common/v1.JobStatus"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/kubeflow/common/pkg/apis/common/v1.JobStatus", "github.com/kubeflow/training-operator/pkg/apis/kubeflow.org/v1.DeepSpeedJobSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_pkg_apis_kubefloworg_v1_DeepSpeedJobList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Default: map[string]interface{}{},
+										Ref:     ref("github.com/kubeflow/training-operator/pkg/apis/kubeflow.org/v1.DeepSpeedJob"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"metadata", "items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/kubeflow/training-operator/pkg/apis/kubeflow.org/v1.DeepSpeedJob", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_pkg_apis_kubefloworg_v1_DeepSpeedJobSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"slotsPerWorker": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Specifies the number of slots per worker used in hostfile. Defaults to 1.",
+							Type:        []string{"integer"},
+							Format:      "int32",
+						},
+					},
+					"runPolicy": {
+						SchemaProps: spec.SchemaProps{
+							Description: "RunPolicy encapsulates various runtime policies of the job.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/kubeflow/common/pkg/apis/common/v1.RunPolicy"),
+						},
+					},
+					"deepspeedReplicaSpecs": {
+						SchemaProps: spec.SchemaProps{
+							Description: "DeepSpeedReplicaSpecs contains maps from `DeepSpeedReplicaType` to `ReplicaSpec` that specify the DeepSpeed replicas to run.",
+							Type:        []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/kubeflow/common/pkg/apis/common/v1.ReplicaSpec"),
+									},
+								},
+							},
+						},
+					},
+					"sshAuthMountPath": {
+						SchemaProps: spec.SchemaProps{
+							Description: "SSHAuthMountPath is the directory where SSH keys are mounted. Defaults to \"/root/.ssh\".",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"deepspeedReplicaSpecs"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/kubeflow/common/pkg/apis/common/v1.ReplicaSpec", "github.com/kubeflow/common/pkg/apis/common/v1.RunPolicy"},
 	}
 }
 

@@ -3,9 +3,10 @@ package v1
 import (
 	"strings"
 
-	commonv1 "github.com/kubeflow/common/pkg/apis/common/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/utils/pointer"
+
+	commonv1 "github.com/kubeflow/common/pkg/apis/common/v1"
 )
 
 func getDefaultContainerIndex(spec *corev1.PodSpec, defaultContainerName string) int {
@@ -61,4 +62,12 @@ func setTypeNameToCamelCase(replicaSpecs map[commonv1.ReplicaType]*commonv1.Repl
 
 func cleanPodPolicyPointer(cleanPodPolicy commonv1.CleanPodPolicy) *commonv1.CleanPodPolicy {
 	return &cleanPodPolicy
+}
+
+func newInt32(v int32) *int32 {
+	return &v
+}
+
+func newInt64(v int64) *int64 {
+	return &v
 }

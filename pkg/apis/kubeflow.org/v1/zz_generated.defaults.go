@@ -27,6 +27,8 @@ import (
 // Public to allow building arbitrary schemes.
 // All generated defaulters are covering - they call all nested defaulters.
 func RegisterDefaults(scheme *runtime.Scheme) error {
+	scheme.AddTypeDefaultingFunc(&DeepSpeedJob{}, func(obj interface{}) { SetObjectDefaults_DeepSpeedJob(obj.(*DeepSpeedJob)) })
+	scheme.AddTypeDefaultingFunc(&DeepSpeedJobList{}, func(obj interface{}) { SetObjectDefaults_DeepSpeedJobList(obj.(*DeepSpeedJobList)) })
 	scheme.AddTypeDefaultingFunc(&MPIJob{}, func(obj interface{}) { SetObjectDefaults_MPIJob(obj.(*MPIJob)) })
 	scheme.AddTypeDefaultingFunc(&MPIJobList{}, func(obj interface{}) { SetObjectDefaults_MPIJobList(obj.(*MPIJobList)) })
 	scheme.AddTypeDefaultingFunc(&MXJob{}, func(obj interface{}) { SetObjectDefaults_MXJob(obj.(*MXJob)) })
@@ -40,6 +42,17 @@ func RegisterDefaults(scheme *runtime.Scheme) error {
 	scheme.AddTypeDefaultingFunc(&XGBoostJob{}, func(obj interface{}) { SetObjectDefaults_XGBoostJob(obj.(*XGBoostJob)) })
 	scheme.AddTypeDefaultingFunc(&XGBoostJobList{}, func(obj interface{}) { SetObjectDefaults_XGBoostJobList(obj.(*XGBoostJobList)) })
 	return nil
+}
+
+func SetObjectDefaults_DeepSpeedJob(in *DeepSpeedJob) {
+	SetDefaults_DeepSpeedJob(in)
+}
+
+func SetObjectDefaults_DeepSpeedJobList(in *DeepSpeedJobList) {
+	for i := range in.Items {
+		a := &in.Items[i]
+		SetObjectDefaults_DeepSpeedJob(a)
+	}
 }
 
 func SetObjectDefaults_MPIJob(in *MPIJob) {

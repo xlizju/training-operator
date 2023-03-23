@@ -16,6 +16,8 @@
 
 package v1
 
+type DeepSpeedJobExpansion interface{}
+
 type MPIJobExpansion interface{}
 
 type MXJobExpansion interface{}

@@ -26,6 +26,10 @@ type FakeKubeflowV1 struct {
 	*testing.Fake
 }
 
+func (c *FakeKubeflowV1) DeepSpeedJobs(namespace string) v1.DeepSpeedJobInterface {
+	return &FakeDeepSpeedJobs{c, namespace}
+}
+
 func (c *FakeKubeflowV1) MPIJobs(namespace string) v1.MPIJobInterface {
 	return &FakeMPIJobs{c, namespace}
 }

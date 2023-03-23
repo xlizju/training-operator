@@ -51,6 +51,8 @@ func (f *genericInformer) Lister() cache.GenericLister {
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
 	// Group=kubeflow.org, Version=v1
+	case v1.SchemeGroupVersion.WithResource("deepspeedjobs"):
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Kubeflow().V1().DeepSpeedJobs().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("mpijobs"):
 		return &genericInformer{resource: resource.GroupResource(), informer: f.Kubeflow().V1().MPIJobs().Informer()}, nil
 	case v1.SchemeGroupVersion.WithResource("mxjobs"):

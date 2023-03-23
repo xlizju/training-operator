@@ -15,18 +15,21 @@ rules:
       - pytorchjobs
       - xgboostjobs
       - paddlejobs
+      - deepspeedjobs
       - mpijobs/status
       - tfjobs/status
       - pytorchjobs/status
       - mxjobs/status
       - xgboostjobs/status
       - paddlejobs/status
+      - deepspeedjobs/status
       - mpijobs/finalizers
       - tfjobs/finalizers
       - pytorchjobs/finalizers
       - mxjobs/finalizers
       - xgboostjobs/finalizers
       - paddlejobs/finalizers
+      - deepspeedjobs/finalizers
     verbs:
       - create
       - delete
@@ -58,6 +61,15 @@ rules:
       - pods/exec
     verbs:
       - create
+  - apiGroups:
+    - batch
+    resources:
+    - jobs
+    verbs:
+    - create
+    - list
+    - update
+    - watch
   - apiGroups:
       - rbac.authorization.k8s.io
     resources:

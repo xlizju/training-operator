@@ -16,6 +16,8 @@ Package v1 is the v1 version of the API.
 Package v1 contains API Schema definitions for the kubeflow.org v1 API group
 
 .Resource Types
+- xref:{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-deepspeedjob[$$DeepSpeedJob$$]
+- xref:{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-deepspeedjoblist[$$DeepSpeedJobList$$]
 - xref:{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-mpijob[$$MPIJob$$]
 - xref:{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-mpijoblist[$$MPIJobList$$]
 - xref:{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-mxjob[$$MXJob$$]
@@ -31,6 +33,68 @@ Package v1 contains API Schema definitions for the kubeflow.org v1 API group
 
 
 === Definitions
+
+[id="{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-deepspeedjob"]
+==== DeepSpeedJob 
+
+
+
+.Appears In:
+****
+- xref:{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-deepspeedjoblist[$$DeepSpeedJobList$$]
+****
+
+[cols="25a,75a", options="header"]
+|===
+| Field | Description
+| *`apiVersion`* __string__ | `kubeflow.org/v1`
+| *`kind`* __string__ | `DeepSpeedJob`
+| *`TypeMeta`* __link:https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#typemeta-v1-meta[$$TypeMeta$$]__ | 
+| *`metadata`* __link:https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#objectmeta-v1-meta[$$ObjectMeta$$]__ | Refer to Kubernetes API documentation for fields of `metadata`.
+
+| *`spec`* __xref:{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-deepspeedjobspec[$$DeepSpeedJobSpec$$]__ | 
+| *`status`* __xref:{anchor_prefix}-github-com-kubeflow-common-pkg-apis-common-v1-jobstatus[$$JobStatus$$]__ | 
+|===
+
+
+[id="{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-deepspeedjoblist"]
+==== DeepSpeedJobList 
+
+
+
+
+
+[cols="25a,75a", options="header"]
+|===
+| Field | Description
+| *`apiVersion`* __string__ | `kubeflow.org/v1`
+| *`kind`* __string__ | `DeepSpeedJobList`
+| *`TypeMeta`* __link:https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#typemeta-v1-meta[$$TypeMeta$$]__ | 
+| *`metadata`* __link:https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.22/#listmeta-v1-meta[$$ListMeta$$]__ | Refer to Kubernetes API documentation for fields of `metadata`.
+
+| *`items`* __xref:{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-deepspeedjob[$$DeepSpeedJob$$] array__ | 
+|===
+
+
+[id="{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-deepspeedjobspec"]
+==== DeepSpeedJobSpec 
+
+
+
+.Appears In:
+****
+- xref:{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-deepspeedjob[$$DeepSpeedJob$$]
+****
+
+[cols="25a,75a", options="header"]
+|===
+| Field | Description
+| *`slotsPerWorker`* __integer__ | Specifies the number of slots per worker used in hostfile. Defaults to 1.
+| *`runPolicy`* __xref:{anchor_prefix}-github-com-kubeflow-common-pkg-apis-common-v1-runpolicy[$$RunPolicy$$]__ | RunPolicy encapsulates various runtime policies of the job.
+| *`deepspeedReplicaSpecs`* __object (keys:ReplicaType, values:ReplicaSpec)__ | DeepSpeedReplicaSpecs contains maps from `DeepSpeedReplicaType` to `ReplicaSpec` that specify the DeepSpeed replicas to run.
+| *`sshAuthMountPath`* __string__ | SSHAuthMountPath is the directory where SSH keys are mounted. Defaults to "/root/.ssh".
+|===
+
 
 [id="{anchor_prefix}-github-com-kubeflow-training-operator-pkg-apis-kubeflow-org-v1-elasticpolicy"]
 ==== ElasticPolicy 
@@ -127,7 +191,7 @@ JobModeType id the type for JobMode
 |===
 | Field | Description
 | *`slotsPerWorker`* __integer__ | Specifies the number of slots per worker used in hostfile. Defaults to 1.
-| *`cleanPodPolicy`* __CleanPodPolicy__ | CleanPodPolicy defines the policy that whether to kill pods after the job completes. Defaults to None.
+| *`cleanPodPolicy`* __xref:{anchor_prefix}-github-com-kubeflow-common-pkg-apis-common-v1-cleanpodpolicy[$$CleanPodPolicy$$]__ | CleanPodPolicy defines the policy that whether to kill pods after the job completes. Defaults to None.
 | *`mpiReplicaSpecs`* __object (keys:ReplicaType, values:ReplicaSpec)__ | `MPIReplicaSpecs` contains maps from `MPIReplicaType` to `ReplicaSpec` that specify the MPI replicas to run.
 | *`mainContainer`* __string__ | MainContainer specifies name of the main container which executes the MPI code.
 | *`runPolicy`* __xref:{anchor_prefix}-github-com-kubeflow-common-pkg-apis-common-v1-runpolicy[$$RunPolicy$$]__ | `RunPolicy` encapsulates various runtime policies of the distributed training job, for example how to clean up resources and how long the job can stay active.

@@ -17,6 +17,9 @@ from __future__ import absolute_import
 from kubernetes.client import *
 
 # import models into model package
+from kubeflow.training.models.kubeflow_org_v1_deep_speed_job import KubeflowOrgV1DeepSpeedJob
+from kubeflow.training.models.kubeflow_org_v1_deep_speed_job_list import KubeflowOrgV1DeepSpeedJobList
+from kubeflow.training.models.kubeflow_org_v1_deep_speed_job_spec import KubeflowOrgV1DeepSpeedJobSpec
 from kubeflow.training.models.kubeflow_org_v1_elastic_policy import KubeflowOrgV1ElasticPolicy
 from kubeflow.training.models.kubeflow_org_v1_mpi_job import KubeflowOrgV1MPIJob
 from kubeflow.training.models.kubeflow_org_v1_mpi_job_list import KubeflowOrgV1MPIJobList
