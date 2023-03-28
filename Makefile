@@ -41,7 +41,7 @@ manifests: controller-gen ## Generate WebhookConfiguration, ClusterRole and Cust
 
 generate: controller-gen ## Generate apidoc, sdk and code containing DeepCopy, DeepCopyInto, and DeepCopyObject method implementations. 
 	# Is controller gen used for code generation?
-	$(CONTROLLER_GEN) object:headerFile="hack/boilerplate.go.txt" paths="./pkg/apis/..."
+	$(CONTROLLER_GEN) object:headerFile="hack/boilerplate/boilerplate.go.txt" paths="./pkg/apis/..."
 	hack/update-codegen.sh
 	hack/python-sdk/gen-sdk.sh
 	$(MAKE) apidoc
@@ -58,10 +58,10 @@ vet: ## Run go vet against code.
 GOLANGCI_LINT=$(shell which golangci-lint)
 golangci-lint:
 ifeq ($(GOLANGCI_LINT),)
-	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(shell go env GOPATH)/bin v1.50.1
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(shell go env GOPATH)/bin v1.52.2
 	$(info golangci-lint has been installed)
 endif
-	golangci-lint run --timeout 5m --go 1.19 ./...
+	golangci-lint run --timeout 5m  --go 1.19 ./...
 
 ENVTEST_K8S_VERSION ?= 1.25
 HAS_SETUP_ENVTEST := $(shell command -v setup-envtest;)

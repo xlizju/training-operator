@@ -93,7 +93,7 @@ func (jc *DeepSpeedJobReconciler) ReconcilePods(
 
 	if !done {
 		if config, err := jc.getOrCreateConfigMap(deepspeedJob); config == nil || err != nil {
-			return fmt.Errorf("getting or creating ConfigMap: %w", err)
+			return err
 		}
 
 		_, err = jc.getOrCreateSSHAuthSecret(deepspeedJob)

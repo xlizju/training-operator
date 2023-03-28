@@ -73,26 +73,26 @@ func getCondition(status commonv1.JobStatus, condType commonv1.JobConditionType)
 	return nil
 }
 
-func hasCondition(status commonv1.JobStatus, condType commonv1.JobConditionType) bool {
-	for _, condition := range status.Conditions {
-		if condition.Type == condType && condition.Status == v1.ConditionTrue {
-			return true
-		}
-	}
-	return false
-}
+// func hasCondition(status commonv1.JobStatus, condType commonv1.JobConditionType) bool {
+// 	for _, condition := range status.Conditions {
+// 		if condition.Type == condType && condition.Status == v1.ConditionTrue {
+// 			return true
+// 		}
+// 	}
+// 	return false
+// }
 
-func isFinished(status commonv1.JobStatus) bool {
-	return isSucceeded(status) || isFailed(status)
-}
+// func isFinished(status commonv1.JobStatus) bool {
+// 	return isSucceeded(status) || isFailed(status)
+// }
 
-func isSucceeded(status commonv1.JobStatus) bool {
-	return hasCondition(status, commonv1.JobSucceeded)
-}
+// func isSucceeded(status commonv1.JobStatus) bool {
+// 	return hasCondition(status, commonv1.JobSucceeded)
+// }
 
-func isFailed(status commonv1.JobStatus) bool {
-	return hasCondition(status, commonv1.JobFailed)
-}
+// func isFailed(status commonv1.JobStatus) bool {
+// 	return hasCondition(status, commonv1.JobFailed)
+// }
 
 // setCondition updates the deepspeedJob to include the provided condition.
 // If the condition that we are about to add already exists
